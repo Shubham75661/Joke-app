@@ -1,7 +1,8 @@
 import React, { Component } from 'react' //React Import
 import "./Jokelist.css" // files import
 import axios from "axios"   // Npm Import
-import uuid from "uuid/v4"
+// import uuid from "uuid/v4"
+import { v4 as uuidv4 } from 'uuid';
 import Joke from './Joke'   //Componant Import
 
  class Jokelist extends Component {
@@ -25,7 +26,7 @@ import Joke from './Joke'   //Componant Import
             let res = await axios.get('https://icanhazdadjoke.com/',{
             headers:{Accept : "application/json"}
             })
-            jokes.push({id: uuid() ,text : res.data.joke, vote:0})
+            jokes.push({id: uuidv4() ,text : res.data.joke, vote:0})
         }
         this.setState(st =>({jokes:[...st.jokes,...jokes]}),/** use spread oprator cause jokes is an array it will add new array in state jokes i.e nested arrays */
         () => window.localStorage.setItem("jokes",JSON.stringify(this.state.jokes))
